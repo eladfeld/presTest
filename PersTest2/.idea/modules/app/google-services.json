@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "578739708596",
+    "firebase_url": "https://perstest-4a059.firebaseio.com",
+    "project_id": "perstest-4a059",
+    "storage_bucket": "perstest-4a059.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578739708596:android:95681e1cfffb4925fb6de1",
+        "android_client_info": {
+          "package_name": "com.example.perstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578739708596-phm72nued5qjlh7nplmea9u0l8vnkbns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.perstest",
+            "certificate_hash": "f535bc9665143b070b66f9a305f3707a260d8a2e"
+          }
+        },
+        {
+          "client_id": "578739708596-c5ogn00sls1llq5ltmto9g4q81jaea8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVR0BU39ahTJrIkBvFsVfDiof7GlW-Eh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578739708596-c5ogn00sls1llq5ltmto9g4q81jaea8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
