@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "495684393207",
+    "firebase_url": "https://perstest-3fd28.firebaseio.com",
+    "project_id": "perstest-3fd28",
+    "storage_bucket": "perstest-3fd28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495684393207:android:3c445c0baf6959acad9bf2",
+        "android_client_info": {
+          "package_name": "com.example.perstest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495684393207-tfqepbhlqtgqdqsjmg9f5alpnf19ma4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOlFuE_7qJjyuwUbJlbwQXRv1CvAJMdSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495684393207-tfqepbhlqtgqdqsjmg9f5alpnf19ma4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
