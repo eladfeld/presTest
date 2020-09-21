@@ -1,98 +1,90 @@
 package com.example.perstest;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.persLayer.Repository;
+import com.persLayer.FireBase;
+import com.persLayer.User;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-import java.sql.SQLOutput;
+import java.util.EventListener;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
+    protected DatabaseReference mDatabase;
+    private EditText passwordText, usernameText;
+    private Button loginButton;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        passwordText = findViewById(R.id.passwordText);
+        usernameText = findViewById(R.id.usernameText);
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Log.d(TAG, "username: "+ usernameText.getText().toString().trim()+"password: "+passwordText.getText().toString().trim());
             }
         });
-
-
+        registerButton = findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegisterActivity();
+                Log.d(TAG, "username: "+ usernameText.getText().toString().trim()+"password: "+passwordText.getText().toString().trim());
+            }
+        });
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void basicReadWrite() {
-        // [START write_message]
-        // Write a message to the database
+    private void openRegisterActivity() {
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    private void verifyUser(final String username, final String password) {
+        if(username == null | password == null)throw new IllegalArgumentException("username or passowrd are null");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-        // [END write_message]
-
-        // [START read_message]
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference ref = database.getReference("users/"+ username+"/Personal Information");
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                User user = dataSnapshot.getValue(User.class);
+                if (user.getPassword().equals(password)) {
+                    Log.d(TAG, "onDataChange: " + user + " 11111111111111111111111111111111111111111");
+                    openConectedActivity();
+                }
+                else
+                    Log.d(TAG, "onDataChange: "+ "wrong email 111111111111111111111111111111111111111111111111"+user);
             }
-
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onDataChange: " + "errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
             }
         });
-        // [END read_message]
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void openConectedActivity() {
+        Intent intent = new Intent(this,ConnectedActicity.class);
+        startActivity(intent);
     }
 }
